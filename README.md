@@ -61,7 +61,8 @@ Telemetry is emitted with stable event names like:
 
 - strict `AuthoringInput` model,
 - prompt builder,
-- `generateDraftCase(...)` orchestration against an injected `GeminiClient`,
+- `GeminiHttpClient` with model fallback (tries `gemini-2.5-flash` -> `gemini-2.0-flash` -> `gemini-1.5-pro`),
+- resilient `generateDraftCase(...)` orchestration (optional local deterministic fallback when external generation fails),
 - post-generation auto-validation,
 - `normalizeAndExport(...)` with deterministic ordering.
 
@@ -125,3 +126,13 @@ These cover:
 ## Backward compatibility note
 
 The repo currently has no legacy runtime artifacts. `src/runtime/loader.ts` is structured to enforce validator gates now and can be extended with a legacy manifest adapter without bypassing validation.
+
+---
+
+## Troubleshooting Gemini model errors
+
+If you see an error like:
+
+- `404 Not Found ... models/gemini-pro is not found for API version v1beta`
+
+use `GeminiHttpClient` and **do not hardcode `gemini-pro`**. This project now attempts modern models in sequence and only fails after all configured models fail. You can also enable local deterministic fallback to keep the authoring flow operational during outages or API/model mismatch events.
