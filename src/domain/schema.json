@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CasePackage",
+  "type": "object",
+  "required": ["case_id", "start_node_id", "chunks", "nodes", "objectives", "triggers", "actions"],
+  "properties": {
+    "case_id": { "type": "string", "pattern": "^case_[a-z0-9_]+$" },
+    "start_node_id": { "type": "string", "pattern": "^node_[a-z0-9_]+$" },
+    "chunks": { "type": "array", "minItems": 4, "maxItems": 4 },
+    "nodes": { "type": "array", "minItems": 20, "maxItems": 20 },
+    "objectives": { "type": "array" },
+    "triggers": { "type": "array" },
+    "actions": { "type": "array" }
+  }
+}
