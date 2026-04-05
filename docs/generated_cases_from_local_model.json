@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-04-05",
+  "generator": "LocalAuthoringModelClient",
+  "notes": "Offline deterministic preview cases when external Gemini is unavailable.",
+  "cases": [
+    {
+      "case_id": "case_preview_technical",
+      "input": {
+        "narrative_tone_bounds": "serious",
+        "conflict_type": "technical",
+        "ambiguity_tolerance": "medium",
+        "excluded_topics": ["none"],
+        "resolution_style": "procedural",
+        "preferred_npc_pressure_pattern": "ramp",
+        "minigame_usage_preference": "medium"
+      },
+      "output_excerpt": {
+        "chunk_summaries": [
+          "Auto-generated chunk 1 (technical)",
+          "Auto-generated chunk 2 (technical)",
+          "Auto-generated chunk 3 (technical)",
+          "Auto-generated chunk 4 (technical)"
+        ],
+        "node_count": 20,
+        "objective_ids": ["obj_complete_lithcalic_override"],
+        "minigames": [
+          "minigame_lithcalic_override",
+          "minigame_calibration_valves",
+          "minigame_de_escalation"
+        ],
+        "guardrails": ["violence_filter", "self_harm_filter"]
+      }
+    },
+    {
+      "case_id": "case_preview_interpersonal",
+      "input": {
+        "narrative_tone_bounds": "empathetic",
+        "conflict_type": "interpersonal",
+        "ambiguity_tolerance": "high",
+        "excluded_topics": ["graphic violence"],
+        "resolution_style": "collaborative",
+        "preferred_npc_pressure_pattern": "wave",
+        "minigame_usage_preference": "light"
+      },
+      "output_excerpt": {
+        "chunk_summaries": [
+          "Auto-generated chunk 1 (interpersonal)",
+          "Auto-generated chunk 2 (interpersonal)",
+          "Auto-generated chunk 3 (interpersonal)",
+          "Auto-generated chunk 4 (interpersonal)"
+        ],
+        "node_count": 20,
+        "objective_ids": ["obj_complete_lithcalic_override"],
+        "minigames": [
+          "minigame_lithcalic_override",
+          "minigame_calibration_valves",
+          "minigame_de_escalation"
+        ],
+        "guardrails": ["violence_filter", "self_harm_filter"]
+      }
+    },
+    {
+      "case_id": "case_preview_ethical",
+      "input": {
+        "narrative_tone_bounds": "measured",
+        "conflict_type": "ethical",
+        "ambiguity_tolerance": "low",
+        "excluded_topics": ["self-harm"],
+        "resolution_style": "principled",
+        "preferred_npc_pressure_pattern": "steady",
+        "minigame_usage_preference": "heavy"
+      },
+      "output_excerpt": {
+        "chunk_summaries": [
+          "Auto-generated chunk 1 (ethical)",
+          "Auto-generated chunk 2 (ethical)",
+          "Auto-generated chunk 3 (ethical)",
+          "Auto-generated chunk 4 (ethical)"
+        ],
+        "node_count": 20,
+        "objective_ids": ["obj_complete_lithcalic_override"],
+        "minigames": [
+          "minigame_lithcalic_override",
+          "minigame_calibration_valves",
+          "minigame_de_escalation"
+        ],
+        "guardrails": ["violence_filter", "self_harm_filter"]
+      }
+    }
+  ]
+}
