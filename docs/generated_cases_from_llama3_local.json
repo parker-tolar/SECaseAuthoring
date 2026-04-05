@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-04-05",
+  "generator": "LlamaLocalClient",
+  "model": "llama3.1:8b-instruct-q4_K_M",
+  "provider": "ollama_local",
+  "notes": "Representative normalized outputs for local quantized llama3 authoring flow.",
+  "cases": [
+    {
+      "case_id": "case_1a_technical_ops",
+      "scenario_grade": "1a",
+      "input": {
+        "narrative_tone_bounds": "serious",
+        "conflict_type": "technical",
+        "ambiguity_tolerance": "medium",
+        "excluded_topics": ["graphic violence"],
+        "resolution_style": "procedural",
+        "preferred_npc_pressure_pattern": "ramp",
+        "minigame_usage_preference": "medium"
+      },
+      "output_excerpt": {
+        "chunk_summaries": [
+          "Auto-generated chunk 1 (technical)",
+          "Auto-generated chunk 2 (technical)",
+          "Auto-generated chunk 3 (technical)",
+          "Auto-generated chunk 4 (technical)"
+        ],
+        "node_count": 20,
+        "objectives": ["obj_complete_lithcalic_override"],
+        "guardrails": ["violence_filter", "self_harm_filter"]
+      }
+    },
+    {
+      "case_id": "case_1a_interpersonal",
+      "scenario_grade": "1a",
+      "input": {
+        "narrative_tone_bounds": "empathetic",
+        "conflict_type": "interpersonal",
+        "ambiguity_tolerance": "high",
+        "excluded_topics": ["self-harm"],
+        "resolution_style": "collaborative",
+        "preferred_npc_pressure_pattern": "wave",
+        "minigame_usage_preference": "light"
+      },
+      "output_excerpt": {
+        "chunk_summaries": [
+          "Auto-generated chunk 1 (interpersonal)",
+          "Auto-generated chunk 2 (interpersonal)",
+          "Auto-generated chunk 3 (interpersonal)",
+          "Auto-generated chunk 4 (interpersonal)"
+        ],
+        "node_count": 20,
+        "objectives": ["obj_complete_lithcalic_override"],
+        "guardrails": ["violence_filter", "self_harm_filter"]
+      }
+    }
+  ]
+}

@@ -56,12 +56,16 @@ Telemetry is emitted with stable event names like:
 - `flag_set`
 - `currency_delta`
 
-## D) Gemini-based authoring workflow primitives
+## D) Local Llama3-first authoring workflow primitives
 `src/authoring/gemini.ts` provides:
 
 - strict `AuthoringInput` model,
 - prompt builder,
-- `generateDraftCase(...)` orchestration against an injected `GeminiClient`,
+- `LlamaLocalClient` (default) for local quantized llama authoring through Ollama (`/api/generate`),
+- `createDefaultAuthoringClient(...)` to choose provider (`llama_local` default, optional `gemini`),
+- `GeminiHttpClient` with model fallback (tries `gemini-2.5-flash` -> `gemini-2.0-flash` -> `gemini-1.5-pro`),
+- `LocalAuthoringModelClient` for fully offline deterministic generation (no network/API key),
+- resilient `generateDraftCase(...)` orchestration (optional local deterministic fallback when external generation fails),
 - post-generation auto-validation,
 - `normalizeAndExport(...)` with deterministic ordering.
 
@@ -113,6 +117,7 @@ Current tests include:
 - `tests/trigger-dispatch.test.ts`
 - `tests/objective-mapping.test.ts`
 - `tests/invalid-rejection.test.ts`
+- `tests/gemini-authoring.test.ts`
 
 These cover:
 - schema/stitching validation,
@@ -125,3 +130,25 @@ These cover:
 ## Backward compatibility note
 
 The repo currently has no legacy runtime artifacts. `src/runtime/loader.ts` is structured to enforce validator gates now and can be extended with a legacy manifest adapter without bypassing validation.
+
+---
+
+## Troubleshooting Gemini model errors
+
+If you see an error like:
+
+- `404 Not Found ... models/gemini-pro is not found for API version v1beta`
+
+use `GeminiHttpClient` and **do not hardcode `gemini-pro`**. If it is provided, the client rewrites it to `gemini-1.5-pro`, then continues through the configured model fallback list. The flow only fails after all configured models fail. You can also enable local deterministic fallback to keep authoring operational during outages or API/model mismatch events.
+
+For local development, you can bypass external model calls entirely by wiring `LocalAuthoringModelClient`.
+
+## Local Llama3 (quantized) setup
+
+Recommended local model path:
+
+1. Run Ollama locally.
+2. Pull a quantized Llama model (example): `llama3.1:8b-instruct-q4_K_M`.
+3. Use `createDefaultAuthoringClient()` with default settings (local llama provider).
+
+If local llama is unavailable at runtime, keep `generateDraftCase(..., { localFallbackOnFailure: true })` enabled to continue via deterministic local draft synthesis.
